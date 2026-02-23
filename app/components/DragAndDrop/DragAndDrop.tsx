@@ -25,16 +25,35 @@ export default function DragAndDrop() {
     const handleOnDragStart = useCallback((id: number) => { setDraggedId(id) }, []);
 
     const handleOnDrop = useCallback((id: number) => {
-
-        const draggedPieceId = pieces.findIndex((each) => each.id === draggedId);
-        const droppedId = pieces.findIndex((each) => each.id === id);
-
+        // for drag and drop and rotate the array follow below code
         setPieces((prev) => {
             const newPieces = [...prev];
-            [newPieces[draggedPieceId], newPieces[droppedId]] = [newPieces[droppedId], newPieces[draggedPieceId]];
-            debugger;
-            return [...newPieces]
-        })
+
+            const draggedPieceIndex = pieces.findIndex((each) => each.id === draggedId);
+            let dropIndex = pieces.findIndex((each) => each.id === id);
+            // remove the dragged piece from its place
+            const [draggedPiece] = newPieces.splice(draggedPieceIndex, 1);
+
+            // if drag is forward only then move the item at dropIndex backwards by 1;
+            // because if drag is backward we dont want to shift the dropIndex
+            if (draggedPieceIndex < dropIndex) {
+                dropIndex = dropIndex - 1;
+            }
+
+            // now place draggedPiece at dropIndex ; splice returns an array rememberand changes the OG array; 
+            // splice syntax : arr.splice(startIndex, deleteCount, item1, item2...)
+            newPieces.splice(dropIndex + 1, 0, draggedPiece);
+
+            return newPieces;
+        });
+
+        // for drag and drop swap
+        // setPieces((prev) => {
+        //     const newPieces = [...prev];
+        //     [newPieces[draggedPieceIndex], newPieces[dropIndex]] = [newPieces[dropIndex], newPieces[draggedPieceIndex]];
+        //     return [...newPieces]
+        // })
+
         setDraggedId(null);
 
     }, [pieces, draggedId]);
