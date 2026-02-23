@@ -1,3 +1,4 @@
+import AutoComplete from "../components/AutoComplete/AutoComplete";
 import DragAndDrop from "../components/DragAndDrop/DragAndDrop";
 import JSONBuilder from "../components/JsonBuilderUI/JSONBuilder";
 import { JsonValidator } from "../components/JsonValidator/JsonValidator";
@@ -10,7 +11,8 @@ export default function Playground() {
 
             {/* <DragAndDrop /> */}
             {/* <JSONBuilder /> */}
-            <JsonValidator />
+            {/* <JsonValidator /> */}
+            <AutoComplete />
         </>
     )
 }
