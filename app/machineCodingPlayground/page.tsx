@@ -2,6 +2,7 @@ import AutoComplete from "../components/AutoComplete/AutoComplete";
 import DragAndDrop from "../components/DragAndDrop/DragAndDrop";
 import JSONBuilder from "../components/JsonBuilderUI/JSONBuilder";
 import { JsonValidator } from "../components/JsonValidator/JsonValidator";
+import MultiSelectDropdown from "../components/MultiselectDropdown/MultiselectDropdown";
 import TicTacToe from "../components/TicTacToe/TicTacToe";
 
 export default function Playground() {
@@ -14,7 +15,8 @@ export default function Playground() {
             {/* <JSONBuilder /> */}
             {/* <JsonValidator /> */}
             {/* <AutoComplete /> */}
-            <TicTacToe />
+            {/* <TicTacToe /> */}
+            <MultiSelectDropdown />
         </>
     )
 }
