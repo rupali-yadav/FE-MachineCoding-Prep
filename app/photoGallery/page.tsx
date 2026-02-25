@@ -1,7 +1,8 @@
 
 "use client";
 
-import { ImageCarousel } from "../components/ImageCarousel/ImageCarousel";
+import { ImageCarousel } from "@/components/ImageCarousel/ImageCarousel";
+
 
 // const getPhotos = async () => {
 //     const resp = await fetch(

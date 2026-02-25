@@ -72,7 +72,7 @@ export default function MultiSelectDropdown() {
     return (
         <div className="w-[400px]" ref={dropdownRef}>
             <h1> Multiselect Dropdown </h1>
-            <div className="p-4 bg-white border rounded-sm  text-black"
+            <div className="p-4 border rounded-sm  text-black"
                 onClick={toggleOptions}
             >
                 {selected?.length === 0 && <div >Choose your skills ...</div>}
