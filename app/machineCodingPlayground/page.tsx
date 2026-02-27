@@ -1,5 +1,6 @@
 import AutoComplete from "@/components/AutoComplete/AutoComplete";
 import DragAndDrop from "@/components/DragAndDrop/DragAndDrop";
+import InfiniteScrollPosts from "@/components/InfiniteScroll/InfiniteScroll";
 import JSONBuilder from "@/components/JsonBuilderUI/JSONBuilder";
 import { JsonValidator } from "@/components/JsonValidator/JsonValidator";
 import MultiSelectDropdown from "@/components/MultiselectDropdown/MultiselectDropdown";
@@ -17,7 +18,8 @@ export default function Playground() {
             <JsonValidator />
             <AutoComplete />
             <TicTacToe /> */}
-            <MultiSelectDropdown />
+            {/* <MultiSelectDropdown /> */}
+            <InfiniteScrollPosts />
         </>
     )
 }
