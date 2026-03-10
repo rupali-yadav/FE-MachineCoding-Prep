@@ -26,7 +26,7 @@ const TicTacToe = () => {
         for (let pattern of winningPatterns) {
             const [a, b, c] = pattern;
 
-            // see if all valuea at these indices are same
+            // see if all values at these indices are same
             if (newBoard[a] && newBoard[a] === newBoard[b] &&
                 newBoard[a] === newBoard[c]
             ) {
