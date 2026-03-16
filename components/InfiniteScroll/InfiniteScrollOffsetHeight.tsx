@@ -58,55 +58,21 @@ export default function InfiniteScrollPosts() {
         }
     }, [canLoadMore]);
 
-
-    // on Load
     useEffect(() => {
+        const onScroll = () => {
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 30) {
+                loadNext();
+            }
+        }
+
+        window.addEventListener("scroll", onScroll);
+
+        return () => { window.removeEventListener("scroll", onScroll) }
+    }, [loadNext]);
+
+    useEffect(()=>{
         loadNext();
-        // adding loadNext as a dependency to avoid stale closure bugs
-    }, [loadNext]);
-
-    // option 1
-    useEffect(() => {
-
-        const sentinelElem = sentinelRef.current;
-        // if we haven't reached sentinel div return
-        if (!sentinelElem) return;
-
-        // else set up the observer
-
-        const observer = new IntersectionObserver(async (entries) => {
-
-            // is the sentinel element currently visible inside the viewport?
-            if (entries[0]?.isIntersecting) loadNext();
-        }, {
-            root: null, // we can provide any dom node here; eg: XYZRef.current
-            rootMargin: "0px",
-            // Trigger the observer 250px before the sentinel actually reaches the screen. 
-            // This will help to prefetch for better UX
-            threshold: 0
-            //This controls how much of the element must be visible before triggering. 
-            // we kept zero because it will trigger when even 1 px is visible
-        });
-
-        observer.observe(sentinelElem);
-
-        return (() => { observer.disconnect() });
-    }, [loadNext]);
-
-
-    // option2
-    // useEffect(() => {
-    //     const onScroll = () => {
-    //         if ((window.innerHeight + window.scrollY) >= window.document.body.offsetHeight - 30) {
-    //             loadNext();
-    //         }
-    //     }
-
-    //     window.addEventListener("scroll", onScroll)
-
-    //     return () => window.removeEventListener("scroll", onScroll);
-
-    // }, []);
+    }, [])
 
     return (
         <>
