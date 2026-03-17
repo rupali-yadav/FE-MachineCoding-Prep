@@ -11,41 +11,36 @@ interface IMenuItem {
     children: Array<IMenuItem>;
 }
 
-
-//  destructured props
-const MenuItem = ({ menuItem }: { menuItem: IMenuItem }) => {
+const TreeNode = ({ node }: { node: IMenuItem }) => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const isExpandable = node.children?.length;
+    // node.collection_type === "folder" || node.collection_type === "list";
 
     return (
-        <div className={`ml-4 border-l-2 p-2`}>
-            <h1 onClick={() => setIsOpen(!isOpen)}>{menuItem?.name}</h1>
+        <div className="ml-4 border-l">
+            <button
+                className={`ml-2 mt-2 ${isExpandable && "cursor-pointer"} bg-amber-200 py-1 px-2 border-2 rounded-sm`}
+                onClick={() => isExpandable && setIsOpen(!isOpen)}
+            >
+                {node.name}
+            </button>
+            {/* isOpen ?? show children */}
+             {/* Recursively call TreeNode for each node */}
             {
-                isOpen ? (
-                    <div>
-                        {menuItem?.children?.length ? menuItem?.children?.map((each) => (
-                            <SubMenuItem subMenu={each} />
-                        )) : null}
-                    </div>
-                ) : null
+                isOpen && isExpandable ? (node.children.map(
+                    (child) => (<TreeNode key={child.uuid} node={child} />)
+                )) : null
             }
         </div>
     )
-};
+}
 
-const SubMenuItem = ({ subMenu }: { subMenu: IMenuItem }) => (
-    <>
-        {subMenu?.collection_type === "folder" || subMenu?.collection_type === "list" ?
-            (<MenuItem menuItem={subMenu} />)
-            : (<h3 key={subMenu?.uuid} className="ml-4 border-l-2 p-2">{subMenu?.name}</h3>)
-        }
-    </>
-);
+const Tree = () => {
 
+    return (
+        <div>{data.map((d) => (<TreeNode key={d.uuid} node={d} />))}</div>
+    )
+}
 
-
-const NestedDropdown = () => (
-    <div>{data.length ? data?.map((item) => (<MenuItem key={item?.uuid} menuItem={item} />)) : null}</div>
-);
-
-export default NestedDropdown;
+export default Tree;
